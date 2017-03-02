@@ -1,0 +1,21 @@
+// Place all the styles related to the Session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#register, #login{
+	display: inline-block;
+	vertical-align: top;
+	border: 2px solid black;
+}
+
+#register {
+	width: 500px;
+}
+	#register p {
+		color:red;
+	}
+
+	#login p {
+		color: red;
+	}	

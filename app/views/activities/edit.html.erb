@@ -1,0 +1,25 @@
+<% @title= "Event Detail" %>
+
+<h1>Edit <%= @event.name %> Event</h1>
+<form role="form" class="form-horizontal" action="/event/edit/<%=@event.id %>/" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<div class="form-group">
+		<label for="event_name">Current Event Name:</label>
+		<input type="text" id="event_name" value="<%=@event.name %>" name="name">		
+	</div>
+	<div class="form-group">
+		<label for="event_location">Current Event Location:</label>
+		<input type="text" id="event_location" value="<%=@event.location %>" name="location">
+	</div>
+	<div class="form-group">
+		<label for="event_date">Current Event Date:</label>
+		<input type="date" id="event_date" value="<%=@event.date%>" name="date">
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn-primary">Update Event</button>
+	</div>
+</form>
+<% if flash[:update_errors] %>
+<p><%=flash[:update_errors] %></p>
+<% end %>
+<a href="/events/">Back to Events</a>

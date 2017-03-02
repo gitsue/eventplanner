@@ -1,0 +1,25 @@
+<% @title= "Register" %>
+
+<div id="register" class="row">
+	<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+	<p><%= error %></p>
+	<% end %>
+	<% end %>
+	<h3>Register</h3>
+	<form action="/register/" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		First Name: <input type="text" name="user[fname]">
+		Last Name: <input type="text" name="user[lname]">
+		Email: <input type="text" name="user[email]">
+		Location: <input type="text" name="user[location]">
+		<select name="user[state]">
+			<option value="">State</option>	
+			<option value="WA">WA</option>
+			<option value="OR">OR</option>
+		</select>
+		Password: <input type="password" name="user[password]">
+		Confirm Pw: <input type="password" name="confirmpw">
+		<input type="submit" value="Register">
+	</form>
+</div>

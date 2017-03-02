@@ -1,0 +1,50 @@
+<% @title= "Event Detail" %>
+<h1><%= @event.name%></h1>
+
+<a href="/events/">Events Dashboard</a>
+<a href="/logout/">Logout</a>
+
+<div id="leftside">
+	<p>Host: <%= @event.user.fname%></p>
+	<p>Date: <%= @event.date.strftime('%B %d, %Y')%></p>
+	<p>Location: <%= @event.location%></p>
+	<p>People who are joining the event: <%= @event.attendees.count %> </p>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Location</th>
+				<th>State</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @event.attendees.each do |person| %>
+			<tr>
+				<td><%= person.user.fname %></td>
+				<td><%= person.user.location %></td>
+				<td><%= person.user.state %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+
+<div id="rightside">
+	<h4>Discussion about this event</h4>
+	<div id="comment_box">
+		<%@comments.each do |content| %>
+		<p><%=content.user.fname %> says: <%= content.content%></p>
+		<% end %>
+	</div>
+
+	<h4>Add Comment:</h4>
+	<form role="form" class="form-horizontal" action="/addcomment/<%= @event.id %>" method="post">
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<div class="form-group">
+			<label for="comment"></label>
+			<textarea id="comment" class="form-control" name="content"></textarea>
+		</div>
+		<button class="btn-primary" type="submit">Submit Comments</button>
+	</form>		
+</div>

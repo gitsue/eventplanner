@@ -1,0 +1,114 @@
+<% @title = "Events" %>
+
+<h1>Welcome, <%= @user.fname %>!</h1>
+	<div id="navbar">
+		<a href="/user/">Edit My Profile</a>
+		<a href="/logout/">Logout</a>
+	</div>
+<p>Here are some of the events at your state:</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>Host</th>
+			<th>Action/Status</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% if @user_events %>
+		<% @user_events.each do |event| %>
+		<tr>
+			<td><a href="/events/<%= event.id %>"><%=event.name %></a></td>
+			<td><%=event.date.strftime('%B %d, %Y') %></td>
+			<td><%=event.location %></td>
+			<td><%=event.user.fname %></td>
+			<td>
+			<% if event.user.id == session[:user_id] %>
+				<a href="/events/<%= event.id %>/edit">Edit</a>
+				<a href="">Delete</a>
+			<% else %>
+				<% if event.user_participated.include?(@user) %>
+					<p>Joining</p>
+				<% else %>
+					<form action="/join/<%= event.id %>" method="post">
+						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+						<button type="submit">Join</button>
+					</form>
+				<% end %>
+			<% end %>
+
+			</td>
+		</tr>
+		<% end %>
+	<% end %>
+	</tbody>
+</table>
+
+<p>Here are some of the events on other states:</p>
+<% if @other_events %>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Host</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+	<% @other_events.each do |event| %>	
+			<tr>
+				<td><a href="/events/<%= event.id %>"><%= event.name %></a></td>
+				<td><%= event.date.strftime('%B %d, %Y') %></td>
+				<td><%= event.location %></td>
+				<td><%= event.user.fname %></td>
+				<td>
+				<% if event.user.id == @user.id %>
+					<a href="">Edit</a>
+					<a href="">Delete</a>				
+				<% else %>
+					<% if event.user_participated.include?(@user) %>
+						<p>Joining</p><a href="">Cancel</a>
+					<% else %>					
+						<form action="/join/<%= event.id %>" method="post">
+							<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+							<button class="btn-primary" type="submit">Join</button>
+						</form>
+					<% end %>	
+				<% end %>
+
+				</td>
+			</tr>
+	<% end %>
+		</tbody>
+	</table>
+<% else %>
+<p>There are no other events in other areas...</p>
+<% end %>
+
+<h4>Add Event</h4>
+<% if flash[:event_errors] %>
+<% flash[:event_errors].each do |error|%>
+<p><%= error %></p>
+<% end %>
+<% end %>
+
+<form id="event" action="/addevent/" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>Name:</label>
+	<input type="text" name="name">
+	<label>Date:</label>
+	<input type="date" name="date">
+	<label>Location:</label>
+	<input type="text" name="location">
+	<button class="btn-success" type="submit">Add Event</button>
+</form>
+
+
+
+
+
+
