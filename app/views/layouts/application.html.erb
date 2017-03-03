@@ -8,6 +8,32 @@
 </head>
 <body>
 	<%= render 'shared/navigation' %>
+	<div class="jumbotron" style="background-image: url('/assets/audience-868074_1281.jpg');">
+		<h1 class="display-3" style="text-align:center; color:white;">Experience & Explore</h1>
+		<p class="lead"></p>
+		<hr class="my-4">
+		<form class="form-inline" action="" method="post">
+			<div class="form-group">
+				<select id="category" class="form-control" style="width:550px;margin-left:250px;">
+					<option>Select a Category</option>
+					<option>Food/Drink</option>
+					<option>Music</option>
+					<option>Arts</option>
+					<option>Outdoors</option>
+					<option>Classes</option>
+				</select>				
+			</div>
+			<button type="submit" class="btn btn-default">Search</button>
+		</form>		
+		<p></p>
+		<p class="lead" style="margin-left:300px;margin-top:50px;">
+			<a class="btn btn-primary btn-lg" href="#" role="button">Food/Drink</a>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Music</a>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Arts</a>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Outdoors</a>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Classes</a>
+		</p>
+	</div>
 	<div id="main container" class="container">
 		<%= yield %>		
 	</div>

@@ -1,26 +1,15 @@
 <% @title= "Welcome" %>
 
-<p>Find & post events in your area</p>
-
 <h4>Latest Events</h4>
 
-<div style="height:550px;background-image: url('/assets/audience-868074_1280.jpg'); padding-top: 225px; padding-left: 280px;">
-	<div style="width:550px; height:159px;padding-top:25px;padding-bottom:25px;border:1px solid white; border-radius: 5px; position:relative;">
-		<form>
-			<div class="form-group">
-				<select id="category" class="form-control">
-					<option>Select a Category</option>
-					<option>Food/Drink</option>
-					<option>Outdoors</option>
-				</select>				
-			</div>
-			<button type="submit" class="btn btn-default">Search</button>
-		</form>		
-	</div>
-</div>
-
 <% @events.each do |e| %>
-	<div id="event_card" style="width:250px;height:200px;border:1px solid gray;display:inline-block;margin:5px;">
-		<p><%=e.name %></p>
+	<div id="event_card" style="width:250px;height:200px;border:1px solid gray;display:inline-block;margin:5px;border-radius:5px;">
+		<div id="event_card_header">
+			
+		</div>
+		<h4 style="margin:auto; text-align:center; margin-top: 50px;"><%=e.name %></h4>
+		<br>
+		<div id="event_card_footer">
+		</div>
 	</div>
 <% end %>
